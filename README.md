@@ -18,6 +18,16 @@ Es una web estática: abrí `index.html` o servila con cualquier servidor estát
 
 Subí el contenido de esta carpeta al directorio público del dominio (habitualmente `public_html`). No hace falta Node.js para producción.
 
+## Conectar con GitHub
+
+Creá un repositorio vacío llamado `delaburo-redesign` y ejecutá desde esta carpeta:
+
+```bash
+git remote add origin https://github.com/TU_USUARIO/delaburo-redesign.git
+git branch -M main
+git push -u origin main
+```
+
 ## Evidencia editorial
 
 Los servicios, datos de contacto y la lista de empresas se basan en la web y la página pública de LinkedIn de DELABURO consultadas en agosto de 2026. La lista de clientes es una declaración pública de la empresa y no se presenta como validación contractual independiente.
