@@ -145,6 +145,14 @@ if (!reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').mat
       .contact-photo{height:180px;margin-top:38px;max-width:480px}
       @media(max-width:640px){.intro-photo{height:180px}.method-photo{height:170px;margin-top:28px}.method-item::after{right:32px;width:62px;height:48px;opacity:.14}.manifesto-photo{right:-34%;top:30%;width:85vw;height:48%;opacity:.32}.contact-photo{height:165px;margin-top:30px}}
     </style>
+    <style id="method-cleanup">
+      .method-photo,.method-item::after{display:none!important}
+      .method-arrow{display:grid;place-items:center;width:28px;height:28px;border:1px solid rgba(255,135,108,.65);border-radius:50%;font-size:0;transition:transform .25s ease,background .25s ease}
+      .method-arrow:hover{background:rgba(255,135,108,.12)}
+      .method-arrow svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+      .method-stamp{font-size:0;letter-spacing:.08em;text-transform:uppercase}
+      .method-stamp::after{content:"Listen  ·  Design  ·  Move";font:italic 16px/1.45 var(--serif);letter-spacing:0;text-transform:none}
+    </style>
   </head>
   <body>
     <div class="reading-progress" aria-hidden="true"><span></span></div>
@@ -205,6 +213,15 @@ if (!reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').mat
         add('.method-sticky', '<div class="method-photo"><img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1100&q=82" alt="Equipo reunido alrededor de una mesa" loading="lazy" width="1100" height="720" /></div>', 'beforeend');
         add('.manifesto', '<div class="manifesto-photo"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=82" alt="Equipo celebrando un logro compartido" loading="lazy" width="1200" height="800" /></div>');
         add('.contact-copy', '<div class="contact-photo"><img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1100&q=82" alt="Espacio de trabajo preparado para un nuevo equipo" loading="lazy" width="1100" height="720" /></div>', 'beforeend');
+      });
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.method-arrow').forEach((arrow) => {
+          arrow.innerHTML = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 13 3M6 3h7v7"/></svg>';
+          arrow.setAttribute('aria-label', 'Ver detalle');
+        });
+        document.querySelector('.method-photo')?.remove();
       });
     </script>
   </body>
