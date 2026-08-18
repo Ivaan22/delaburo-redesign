@@ -12,11 +12,16 @@ Landing B2B estática para DELABURO S.R.L., enfocada en outsourcing, recruitment
 
 ## Ejecutar localmente
 
-Es una web estática: abrí `index.html` o servila con cualquier servidor estático.
+Es una web estática: abrí `index.html` o servila con cualquier servidor estático. También incluye un servidor Node mínimo para el importador de aplicaciones de Hostinger:
+
+```bash
+npm run build
+npm start
+```
 
 ## Publicar en Hostinger
 
-Subí el contenido de esta carpeta al directorio público del dominio (habitualmente `public_html`). No hace falta Node.js para producción.
+Para el flujo Git normal, elegí despliegue estático y dejá la ruta de instalación vacía para publicar en `/public_html`. Si elegís el importador Node de la captura, `package.json` ya está incluido y el comando de inicio es `npm start`.
 
 ## Conectar con GitHub
 

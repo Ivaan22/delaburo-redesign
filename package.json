@@ -1,0 +1,13 @@
+{
+  "name": "delaburo-redesign",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing estática de DELABURO S.R.L.",
+  "scripts": {
+    "start": "node server.cjs",
+    "build": "node -e \"console.log('Static site ready — no build step required')\""
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
