@@ -124,6 +124,27 @@ if (!reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').mat
 
 });
     </script>
+    <style id="delaburo-media-enhancements">
+      .intro-photo,.method-photo,.contact-photo{position:relative;overflow:hidden;border-radius:12px}
+      .intro-photo{height:150px;margin-bottom:18px}
+      .intro-photo img,.method-photo img,.contact-photo img{width:100%;height:100%;display:block;object-fit:cover;filter:saturate(.78)}
+      .intro-photo::after,.method-photo::after,.contact-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(9,35,45,.04),rgba(9,35,45,.34));pointer-events:none}
+      .card-image{position:absolute;inset:auto 0 0;width:100%;height:42%;object-fit:cover;opacity:.28;mix-blend-mode:multiply;transition:transform .7s ease,opacity .35s ease}
+      .bento-card:hover .card-image{transform:scale(1.06);opacity:.42}
+      .bento-recruit h3,.bento-recruit p,.bento-recruit .card-link,.bento-recruit .bento-number,.bento-recruit .mini-icon,.bento-payroll h3,.bento-payroll p,.bento-payroll .card-link,.bento-payroll .bento-number,.bento-payroll .mini-icon,.bento-it h3,.bento-it p,.bento-it .card-link,.bento-it .bento-number,.bento-it .it-topline{position:relative;z-index:2}
+      .method-photo{height:185px;margin-top:34px;max-width:360px}
+      .method-item{position:relative;overflow:hidden}
+      .method-item::after{content:"";position:absolute;right:42px;top:18px;width:92px;height:66px;border-radius:8px;background-size:cover;background-position:center;opacity:.17;filter:saturate(.7);transition:opacity .3s ease,transform .4s ease}
+      .method-item:hover::after{opacity:.35;transform:scale(1.08) rotate(2deg)}
+      .method-item:nth-child(1)::after{background-image:url("https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=300&q=70")}
+      .method-item:nth-child(2)::after{background-image:url("https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&q=70")}
+      .method-item:nth-child(3)::after{background-image:url("https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=300&q=70")}
+      .manifesto-photo{position:absolute;z-index:1;right:8%;top:12%;width:min(38vw,480px);height:76%;overflow:hidden;border-radius:220px 220px 12px 12px;opacity:.5;transform:rotate(3deg)}
+      .manifesto-photo img{width:100%;height:100%;display:block;object-fit:cover;filter:grayscale(.2) saturate(.7)}
+      .manifesto-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(145deg,rgba(9,35,45,.12),rgba(9,35,45,.9))}
+      .contact-photo{height:180px;margin-top:38px;max-width:480px}
+      @media(max-width:640px){.intro-photo{height:180px}.method-photo{height:170px;margin-top:28px}.method-item::after{right:32px;width:62px;height:48px;opacity:.14}.manifesto-photo{right:-34%;top:30%;width:85vw;height:48%;opacity:.32}.contact-photo{height:165px;margin-top:30px}}
+    </style>
   </head>
   <body>
     <div class="reading-progress" aria-hidden="true"><span></span></div>
@@ -171,5 +192,20 @@ if (!reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').mat
     </main>
 
     <footer class="site-footer"><div class="container footer-main"><a class="brand brand-footer" href="#inicio"><span class="brand-symbol">D</span><span>DELABURO<span class="brand-dot">.</span></span></a><p>Talento que mueve negocios.</p><div class="footer-links"><a href="#soluciones">Soluciones</a><a href="#metodo">Método</a><a href="#contacto">Contacto</a><a href="https://www.linkedin.com/company/delaburo" target="_blank" rel="noreferrer">LinkedIn ↗</a></div></div><div class="container footer-bottom"><span>© 2026 DELABURO S.R.L.</span><span>Buenos Aires · Argentina</span><a href="https://www.delaburo.com/pol%C3%ADtica-de-privacidad" target="_blank" rel="noreferrer">Privacidad ↗</a></div></footer>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const add = (selector, markup, position = 'afterbegin') => {
+          const node = document.querySelector(selector);
+          if (node && !node.querySelector('[data-generated-media]')) node.insertAdjacentHTML(position, markup.replace('<img ', '<img data-generated-media="true" '));
+        };
+        add('.intro-aside', '<div class="intro-photo"><img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=900&q=82" alt="Equipo conversando en una oficina luminosa" loading="lazy" width="900" height="620" /></div>');
+        add('.bento-recruit', '<img class="card-image" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=82" alt="Equipo diverso colaborando" loading="lazy" width="900" height="560" />');
+        add('.bento-payroll', '<img class="card-image" src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=900&q=82" alt="Personas analizando datos de negocio" loading="lazy" width="900" height="560" />');
+        add('.bento-it', '<img class="card-image" src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=82" alt="Equipo técnico trabajando en un proyecto" loading="lazy" width="1200" height="760" />');
+        add('.method-sticky', '<div class="method-photo"><img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1100&q=82" alt="Equipo reunido alrededor de una mesa" loading="lazy" width="1100" height="720" /></div>', 'beforeend');
+        add('.manifesto', '<div class="manifesto-photo"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=82" alt="Equipo celebrando un logro compartido" loading="lazy" width="1200" height="800" /></div>');
+        add('.contact-copy', '<div class="contact-photo"><img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1100&q=82" alt="Espacio de trabajo preparado para un nuevo equipo" loading="lazy" width="1100" height="720" /></div>', 'beforeend');
+      });
+    </script>
   </body>
 </html>
