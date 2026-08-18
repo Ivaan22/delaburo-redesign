@@ -171,6 +171,12 @@ if (!reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').mat
       @media(prefers-reduced-motion:reduce){.client-rail-track{animation:none;transform:none}}
       @media(max-width:640px){.client-rail::before,.client-rail::after{width:28px}.client-rail-track{animation-duration:27s}.brand-logo{width:118px;height:40px;padding:8px 12px}.brand-logo--wide{width:138px}.brand-rail-label{height:40px;font-size:8px}.brand-marquee-group{gap:9px;padding-right:9px}}
     </style>
+    <style id="editorial-label-cleanup">
+      .section-tag>span:first-child,.bento-number,.method-index,.stage-card-kicker,.bento-art-label,.form-heading>span:last-child{display:none!important}
+      .method-item{grid-template-columns:1fr 28px}
+      .bento-recruit h3,.bento-payroll h3,.bento-it h3{margin-top:28px}
+      @media(max-width:640px){.method-item{grid-template-columns:1fr 20px}.bento-recruit h3,.bento-payroll h3,.bento-it h3{margin-top:28px}}
+    </style>
   </head>
   <body>
     <div class="reading-progress" aria-hidden="true"><span></span></div>
@@ -271,6 +277,26 @@ if (!reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').mat
         };
         const group = '<span class="brand-rail-label">Experiencia con equipos de</span>'+brands.map(item).join('');
         rail.innerHTML = '<span class="brand-marquee-group">'+group+'</span><span class="brand-marquee-group" aria-hidden="true">'+group+'</span>';
+      });
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const logos = {
+          'Mercedes-Benz':'<svg viewBox="0 0 180 54" aria-label="Mercedes-Benz"><circle cx="27" cy="27" r="20" fill="none" stroke="#09232d" stroke-width="2"/><path d="m27 10 4.8 14.7L43 27l-11.2 2.8L27 44l-4.8-14.2L11 27l11.2-2.3L27 10Z" fill="none" stroke="#09232d" stroke-width="2"/><text x="57" y="33" fill="#09232d" font-family="Arial,sans-serif" font-size="15" font-weight="700">Mercedes-Benz</text></svg>',
+          'Ford':'<svg viewBox="0 0 180 54" aria-label="Ford"><ellipse cx="34" cy="27" rx="29" ry="17" fill="#174a8b"/><text x="34" y="34" text-anchor="middle" fill="#fff" font-family="Georgia,serif" font-size="21" font-style="italic">Ford</text></svg>',
+          'Mercado Libre':'<svg viewBox="0 0 180 54" aria-label="Mercado Libre"><circle cx="27" cy="27" r="21" fill="#ffe600"/><path d="M14 25c4-8 10-8 14 0 4-8 10-8 14 0M18 31c5 6 13 6 18 0" fill="none" stroke="#173b47" stroke-width="2.4" stroke-linecap="round"/><text x="58" y="33" fill="#09232d" font-family="Arial,sans-serif" font-size="14" font-weight="700">Mercado Libre</text></svg>',
+          'Bayer':'<svg viewBox="0 0 180 54" aria-label="Bayer"><circle cx="27" cy="27" r="20" fill="none" stroke="#78be20" stroke-width="3"/><path d="M14 27h26M27 14v26" stroke="#78be20" stroke-width="3"/><text x="58" y="33" fill="#09232d" font-family="Arial,sans-serif" font-size="17" font-weight="700">BAYER</text></svg>',
+          'Raízen':'<svg viewBox="0 0 180 54" aria-label="Raízen"><path d="M18 36c0-18 14-25 30-24-2 14-12 24-30 24Z" fill="#159447"/><path d="M22 34c6-7 12-12 22-17" fill="none" stroke="#d7f267" stroke-width="2"/><text x="57" y="33" fill="#09232d" font-family="Arial,sans-serif" font-size="17" font-weight="700">RAÍZEN</text></svg>',
+          'RE/MAX':'<svg viewBox="0 0 180 54" aria-label="RE/MAX"><path d="M28 8c-10 0-17 7-17 16 0 11 17 23 17 23s17-12 17-23c0-9-7-16-17-16Z" fill="#174b9b"/><path d="M11 25h34" stroke="#ed1c24" stroke-width="4"/><text x="58" y="33" fill="#09232d" font-family="Arial,sans-serif" font-size="17" font-weight="700">RE/MAX</text></svg>',
+          'Red Hat':'<svg viewBox="0 0 180 54" aria-label="Red Hat"><path d="M12 31c3-13 8-18 17-18 8 0 13 4 14 12l-5 8H17Z" fill="#e51b23"/><path d="M19 35c7 4 17 3 24-2" fill="none" stroke="#09232d" stroke-width="3" stroke-linecap="round"/><text x="57" y="33" fill="#09232d" font-family="Arial,sans-serif" font-size="16" font-weight="700">Red Hat</text></svg>',
+          'YPF':'<svg viewBox="0 0 180 54" aria-label="YPF"><rect x="5" y="9" width="48" height="36" rx="5" fill="#1261a0"/><text x="29" y="34" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="17" font-weight="700">YPF</text><path d="M63 40h96" stroke="#f2c94c" stroke-width="3"/><text x="63" y="29" fill="#09232d" font-family="Arial,sans-serif" font-size="12" font-weight="700">energía argentina</text></svg>',
+          'SAP':'<svg viewBox="0 0 180 54" aria-label="SAP"><path d="M7 9h49v36H7Z" fill="#0874b9"/><text x="31" y="34" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="20" font-weight="700">SAP</text></svg>',
+          'Reckitt':'<svg viewBox="0 0 180 54" aria-label="Reckitt"><path d="m12 35 12-22 9 10 10-10-10 26-9-10-12 6Z" fill="#1c3f94"/><text x="57" y="33" fill="#09232d" font-family="Arial,sans-serif" font-size="17" font-weight="700">reckitt</text></svg>'
+        };
+        document.querySelectorAll('.brand-logo').forEach((logo) => {
+          const name = logo.getAttribute('title');
+          if (logos[name]) logo.innerHTML = logos[name];
+        });
       });
     </script>
   </body>
