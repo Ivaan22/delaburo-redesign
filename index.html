@@ -153,6 +153,24 @@ if (!reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').mat
       .method-stamp{font-size:0;letter-spacing:.08em;text-transform:uppercase}
       .method-stamp::after{content:"Listen  ·  Design  ·  Move";font:italic 16px/1.45 var(--serif);letter-spacing:0;text-transform:none}
     </style>
+    <style id="brand-rail-enhancement">
+      .client-rail{position:relative;overflow:hidden}
+      .client-rail::before,.client-rail::after{content:"";position:absolute;z-index:2;top:0;bottom:0;width:90px;pointer-events:none}
+      .client-rail::before{left:0;background:linear-gradient(90deg,var(--paper),transparent)}
+      .client-rail::after{right:0;background:linear-gradient(270deg,var(--paper),transparent)}
+      .client-rail-track{display:flex;gap:0;min-width:max-content;padding:16px 0;animation:brandRail 34s linear infinite;will-change:transform}
+      .client-rail:hover .client-rail-track{animation-play-state:paused}
+      .brand-marquee-group{display:flex;align-items:center;gap:14px;padding-right:14px;flex-shrink:0}
+      .brand-logo{display:inline-flex;align-items:center;justify-content:center;width:142px;height:46px;padding:10px 16px;border:1px solid rgba(9,35,45,.11);border-radius:8px;background:rgba(255,255,255,.52);color:var(--ink);transition:transform .25s ease,background .25s ease}
+      .brand-logo:hover{transform:translateY(-3px);background:#fff}
+      .brand-logo img{display:block;width:100%;height:100%;object-fit:contain;filter:grayscale(1) contrast(1.15);opacity:.8}
+      .brand-logo svg{display:block;width:100%;height:100%;overflow:visible}
+      .brand-logo--wide{width:166px}
+      .brand-rail-label{display:inline-flex;align-items:center;justify-content:center;height:46px;padding:0 12px;color:#607277;font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;white-space:nowrap}
+      @keyframes brandRail{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+      @media(prefers-reduced-motion:reduce){.client-rail-track{animation:none;transform:none}}
+      @media(max-width:640px){.client-rail::before,.client-rail::after{width:28px}.client-rail-track{animation-duration:27s}.brand-logo{width:118px;height:40px;padding:8px 12px}.brand-logo--wide{width:138px}.brand-rail-label{height:40px;font-size:8px}.brand-marquee-group{gap:9px;padding-right:9px}}
+    </style>
   </head>
   <body>
     <div class="reading-progress" aria-hidden="true"><span></span></div>
@@ -222,6 +240,37 @@ if (!reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').mat
           arrow.setAttribute('aria-label', 'Ver detalle');
         });
         document.querySelector('.method-photo')?.remove();
+      });
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const rail = document.querySelector('.client-rail-track');
+        if (!rail || rail.dataset.logosReady) return;
+        rail.dataset.logosReady = 'true';
+        const brands = [
+          {name:'Mercedes-Benz', src:'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/mercedes.svg'},
+          {name:'Ford', src:'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/ford.svg'},
+          {name:'Mercado Libre', mark:'M', tone:'#ffe600', wide:true},
+          {name:'Bayer', mark:'BAYER', tone:'#78be20', wide:true},
+          {name:'Raízen', mark:'RAÍZEN', tone:'#159447', wide:true},
+          {name:'RE/MAX', mark:'RE/MAX', tone:'#174b9b', wide:true},
+          {name:'Red Hat', src:'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/redhat.svg'},
+          {name:'YPF', mark:'YPF', tone:'#1261a0'},
+          {name:'SAP', src:'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/sap.svg'},
+          {name:'Reckitt', mark:'reckitt', tone:'#1c3f94', wide:true}
+        ];
+        const fallback = (brand) => {
+          const isCircle = brand.name === 'Mercado Libre';
+          return '<svg viewBox="0 0 160 48" role="img" aria-label="'+brand.name+'"><rect x="'+(isCircle ? 55 : 2)+'" y="2" width="'+(isCircle ? 44 : 156)+'" height="44" rx="'+(isCircle ? 22 : 8)+'" fill="'+brand.tone+'" opacity=".16"/><text x="80" y="31" text-anchor="middle" fill="'+brand.tone+'" font-family="Arial,sans-serif" font-size="'+(isCircle ? 26 : 17)+'" font-weight="700" letter-spacing="'+(isCircle ? 0 : 1)+'">'+brand.mark+'</text></svg>';
+        };
+        const item = (brand) => {
+          const visual = brand.src
+            ? '<img src="'+brand.src+'" alt="'+brand.name+'" loading="lazy" />'
+            : fallback(brand);
+          return '<span class="brand-logo '+(brand.wide ? 'brand-logo--wide' : '')+'" title="'+brand.name+'">'+visual+'</span>';
+        };
+        const group = '<span class="brand-rail-label">Experiencia con equipos de</span>'+brands.map(item).join('');
+        rail.innerHTML = '<span class="brand-marquee-group">'+group+'</span><span class="brand-marquee-group" aria-hidden="true">'+group+'</span>';
       });
     </script>
   </body>
