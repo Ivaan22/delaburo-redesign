@@ -177,6 +177,21 @@ if (!reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').mat
       .bento-recruit h3,.bento-payroll h3,.bento-it h3{margin-top:28px}
       @media(max-width:640px){.method-item{grid-template-columns:1fr 20px}.bento-recruit h3,.bento-payroll h3,.bento-it h3{margin-top:28px}}
     </style>
+    <style id="mobile-card-layout-fix">
+      .bento-recruit .card-image,.bento-payroll .card-image,.bento-it .card-image{z-index:0}
+      .bento-recruit .card-link,.bento-payroll .card-link,.bento-it .card-link{z-index:4;bottom:24px}
+      .bento-recruit .mini-icon,.bento-payroll .mini-icon{font-size:0;width:36px;height:36px;border:1px solid currentColor;border-radius:50%;z-index:3}
+      .bento-recruit .mini-icon::before{content:"";position:absolute;inset:8px;border:1px solid currentColor;border-radius:50%}
+      .bento-payroll .mini-icon{border-radius:9px}
+      .bento-payroll .mini-icon::before{content:"";position:absolute;width:11px;height:11px;left:11px;top:10px;border-top:1.7px solid currentColor;border-right:1.7px solid currentColor}
+      .bento-payroll .mini-icon::after{content:"";position:absolute;width:14px;height:1.7px;left:8px;top:21px;background:currentColor;transform:rotate(-45deg);transform-origin:right center}
+      @media(max-width:640px){
+        .bento-recruit,.bento-payroll,.bento-it{min-height:390px;padding-bottom:150px}
+        .bento-recruit p,.bento-payroll p,.bento-it p{max-width:290px;padding-bottom:112px}
+        .bento-recruit .card-image,.bento-payroll .card-image,.bento-it .card-image{height:35%;opacity:.2}
+        .bento-recruit .card-link,.bento-payroll .card-link,.bento-it .card-link{bottom:24px}
+      }
+    </style>
   </head>
   <body>
     <div class="reading-progress" aria-hidden="true"><span></span></div>
